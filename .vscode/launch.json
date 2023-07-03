@@ -1,0 +1,64 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "gevent": true
+    },
+    {
+      "name": "Local",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "src.main:app",
+        "--reload",
+        "--workers",
+        "1",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000",
+        "--timeout-keep-alive",
+        "600"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "pythonArgs": ["-Xfrozen_modules=off"],
+      "envFile": "${workspaceFolder}/.env.dev"
+    },
+    {
+      "name": "Remote",
+      "type": "python",
+      "request": "attach",
+      "port": 5678,
+      "host": "127.0.0.1",
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/usr/src/app"
+        }
+      ]
+    },
+    {
+      "name": "Locust",
+      "type": "python",
+      "request": "launch",
+      "module": "locust",
+      "args": [
+        "-f",
+        "${file}",
+        "--headless",
+        "--users=1",
+        "--config=${workspaceFolder}/.locust.conf"
+      ],
+      "console": "integratedTerminal",
+      "gevent": true
+    }
+  ]
+}
