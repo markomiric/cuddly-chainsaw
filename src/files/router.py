@@ -92,7 +92,7 @@ async def download_file(filename: Annotated[str, "The name or path to the file t
             return StreamingResponse(
                 iter([zip_io.getvalue()]),
                 media_type="application/x-zip-compressed",
-                headers={"Content-Disposition": f"attachment; filename=images.zip"},
+                headers={"Content-Disposition": f"attachment; filename=files.zip"},
             )
 
     file_path = os.path.normpath(f"{DATA_FOLDER}/{filename}")
